@@ -53,7 +53,7 @@
  </aside></div>
 </main><footer><span>UVUL Customer Happiness · Experiencia de atención al cliente</span><span class="foot-demo">Prototipo visual. Canales, IA e integraciones no conectados.</span></footer></div><div class="toast" id="toast"></div>
 <script>
-const loadingScreen=document.querySelector('#loadingScreen');function finishLoading(){setTimeout(()=>{loadingScreen.classList.add('is-hidden');setTimeout(()=>loadingScreen.remove(),420)},650)}if(document.readyState==='complete')finishLoading();else window.addEventListener('load',finishLoading,{once:true});
+const loadingScreen=document.querySelector('#loadingScreen');function finishLoading(){setTimeout(()=>{loadingScreen.classList.add('is-hidden');setTimeout(()=>loadingScreen.remove(),420)},15000)}if(document.readyState==='complete')finishLoading();else window.addEventListener('load',finishLoading,{once:true});
 // Catálogo de demostración editable. Sustituir por el catálogo oficial al definirlo.
 const programCatalog=['Expert','Legacy','Legacy Retos','Legacy de Poder','Expert de Poder','Spencer','Otro / No estoy seguro'];
 const select=document.querySelector('#program');programCatalog.forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;select.append(option)});
