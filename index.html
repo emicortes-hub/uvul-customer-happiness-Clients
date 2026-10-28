@@ -7,6 +7,7 @@
 <title>UVUL · Customer Happiness — Demo</title>
 <style>
 .demo{border-top-width:7px;padding-top:8px;padding-bottom:10px}.suggestion-title{font-size:11px;color:var(--muted);margin:9px 0 7px}.suggestions{display:flex;gap:7px;flex-wrap:wrap}.suggestion{border:1px solid #dce7e1;border-radius:99px;padding:7px 10px;background:#f7fbf8;color:#35654f;font-size:11px;transition:.15s}.suggestion:hover,.suggestion:focus{background:#e3f2e9;border-color:#9bc8ad}.hero{position:relative}.hero:after{content:'';display:block;position:absolute;width:68px;height:4px;background:var(--sky);border-radius:3px;left:0;bottom:-17px}.main-card{border-top:3px solid #d6eff9}.form-foot{max-width:520px;margin-left:auto;margin-right:auto;line-height:1.5}.help-card{background:linear-gradient(145deg,#fff 55%,#f1f8fb)}@media(max-width:580px){.suggestion{font-size:10px;padding:7px 9px}}
+.loading-screen{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at 50% 12%,#29405b 0%,#142238 52%,#101a2a 100%);opacity:1;visibility:visible;transition:opacity .38s ease,visibility .38s ease}.loading-screen.is-hidden{opacity:0;visibility:hidden;pointer-events:none}.loading-card{width:min(420px,100%);padding:34px;border-radius:22px;background:#fff;box-shadow:0 24px 70px #0004}.loading-brand{display:flex;align-items:center;gap:12px;margin-bottom:28px;color:#172b43;font:800 15px Manrope,'DM Sans',sans-serif;letter-spacing:.08em}.loading-brand small{display:block;margin-top:3px;color:#65778a;font:500 9px 'DM Sans',sans-serif;letter-spacing:.17em}.loading-mark{height:42px;width:42px;border-radius:50%;display:grid;place-items:center;background:#174b7a;color:#d8eeff;font:800 20px Manrope,sans-serif}.loading-card h2{margin:0 0 7px;color:#172b43;font:700 23px Manrope,'DM Sans',sans-serif;letter-spacing:-.04em}.loading-card p{margin:0;color:#65778a;font-size:13px;line-height:1.55}.loading-progress{display:flex;align-items:center;gap:11px;margin-top:24px;color:#4d6659;font-size:11px;font-weight:700}.loading-spinner{width:17px;height:17px;border:2px solid #dcece3;border-top-color:#25865f;border-radius:50%;animation:uvulspin .75s linear infinite}@keyframes uvulspin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.loading-spinner{animation:none}.loading-screen{transition:none}}
 </style>
 <style>
 
@@ -14,6 +15,7 @@
 </style>
 </head>
 <body>
+<div class="loading-screen" id="loadingScreen" role="status" aria-live="polite" aria-label="Cargando la experiencia UVUL"><div class="loading-card"><div class="loading-brand"><span class="loading-mark">u</span><span>UVUL<small>CUSTOMER HAPPINESS</small></span></div><h2>Cargando tu espacio</h2><p>Estamos preparando la experiencia de atención para ti.</p><div class="loading-progress"><span class="loading-spinner" aria-hidden="true"></span>Preparando el centro de ayuda…</div></div></div>
 <div class="demo"><b>◉</b> DEMO INTERACTIVA · Respuestas y seguimiento simulados · No ingreses información sensible</div>
 <header class="top"><div class="brand"><div class="mark">u</div><div>UVUL<small>CUSTOMER HAPPINESS</small></div></div><div class="top-right"><span><i class="dot"></i> Centro de ayuda</span></div></header>
 <main class="wrap">
@@ -31,6 +33,7 @@
  </aside></div>
 </main><footer><span>UVUL Customer Happiness · Experiencia de atención al cliente</span><span class="foot-demo">Prototipo visual. Canales, IA e integraciones no conectados.</span></footer><div class="toast" id="toast"></div>
 <script>
+const loadingScreen=document.querySelector('#loadingScreen');function finishLoading(){setTimeout(()=>{loadingScreen.classList.add('is-hidden');setTimeout(()=>loadingScreen.remove(),420)},650)}if(document.readyState==='complete')finishLoading();else window.addEventListener('load',finishLoading,{once:true});
 // Catálogo de demostración editable. Sustituir por el catálogo oficial al definirlo.
 const programCatalog=['Expert','Legacy','Legacy Retos','Legacy de Poder','Expert de Poder','Spencer','Otro / No estoy seguro'];
 const select=document.querySelector('#program');programCatalog.forEach(name=>{const option=document.createElement('option');option.value=name;option.textContent=name;select.append(option)});document.querySelectorAll('.suggestion').forEach(button=>button.addEventListener('click',()=>{const box=document.querySelector('#message');box.value=button.dataset.prompt;box.focus()}));
@@ -41,3 +44,4 @@ form.addEventListener('submit',e=>{e.preventDefault();const name=document.queryS
 document.querySelector('#resolvedBtn').addEventListener('click',()=>{document.querySelector('#statusPill').textContent='Marcado como resuelto';document.querySelector('#statusText').textContent='Gracias por confirmarlo';document.querySelector('#escalation').classList.remove('show');notify('Listo: se actualizó el estado de ejemplo.')});
 document.querySelector('#escalateBtn').addEventListener('click',()=>{document.querySelector('#escalation').classList.add('show');document.querySelector('#statusPill').textContent='Pendiente de revisión';document.querySelector('#statusText').textContent='Escalado a atención humana';document.querySelector('#resultTitle').textContent='Tu solicitud requiere seguimiento';notify('Escalamiento simulado; no se envió a un equipo real.')});
 </script></body></html>
+
